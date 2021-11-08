@@ -22,11 +22,7 @@ namespace AddressBookRegexValidation
             }
         }
 
-        public void CreateANewContact()
-        {
-            Contacts contact = new Contacts();
-            addressBook.Add(contact);
-        }
+       
 
     }
 }
