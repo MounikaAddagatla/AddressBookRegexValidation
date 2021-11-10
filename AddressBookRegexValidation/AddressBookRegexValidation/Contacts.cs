@@ -7,97 +7,218 @@ namespace AddressBookRegexValidation
 {
     class Contacts
     {
+        private string FirstName { get; set; }
+        private string LastName { get; set; }
+        private string Address { get; set; }
+        private string State { get; set; }
+        private string Email { get; set; }
+        private string City { get; set; }
+        private string PhnNum { get; set; }
+        private string Zip { get; set; }
         const string FIRST_NAME = "^[A-Z]{1}[a-z]{3,}$";
         const string LAST_NAME = "^[A-Z]{1}[a-z]{3,}$";
-        // const string SUPPORTED_DOMAIN = "@bl.co.";
-        const string Address = "^[A-Za-z]{1,}$";
-        const string City = "^[a-zA-Z]+(?:[\\s-][a-zA-Z]+)*$";
-        const string State = "^[a-zA-Z]+(?:[\\s-][a-zA-Z]+)*$";
+        const string ADDRESS = "^[A-Za-z]{3,}$";
+        const string CITY = "^[a-zA-Z]+(?:[\\s-][a-zA-Z]+)*$";
+        const string STATE = "^[a-zA-Z]+(?:[\\s-][a-zA-Z]+)*$";
         const string EMAIL = "^[A-Z0-9a-z]+([.#$^_-][A-Za-z0-9]+)?[@][A-Za-z]{2,}[.][A-Za-z]{2,3}([.][a-zA-Z]{2})?$";
-        const string PHN_NUM = "^([+][0-9]{2}\\s[6-9]{1}[0-9]{9}$)";
-        const string Zip = "^\\d{5,}(?:[-\\s]\\d{4})?$";
+        const string PHN_NUM = "^([+][0-9]{2}\\s)?[6-9]{1}[0-9]{9}$";
+        const string ZIP = "^\\d{5,}(?:[-\\s]\\d{4})?$";
+
+       
+        public Contacts(string firstName, string lastName, string address, string state, string email, string city, string phnNum, string zip)
+        {
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Address = address;
+            this.State = state;
+            this.Email = email;
+            this.City = city;
+            this.PhnNum = phnNum;
+            this.Zip = zip;
+        }
+
+        public Contacts()
+        {
+        }
+
+        public bool IsValid()
+        {
+            return IsValidFirstName(FirstName) && IsValidLastName(LastName) && IsValidAddress(Address) && IsValidCity(City) && IsValidEmail(Email) &&  IsValidPhnNum(PhnNum) && IsValidState(State) && IsValidZip(Zip);
+        }
         // First Name Validation
-        public void IsValidFirstName(string firstname)
+        public bool IsValidFirstName(string firstname)
         {
             if (Regex.IsMatch(firstname, FIRST_NAME))
             {
-                Console.WriteLine("FirstName is validated");
-                return;
+                return true;
             }
-            Console.WriteLine("FirstName is not validated");
+            return false;
         }
         // LastName validation
-        public void IsValidLastName(string lastName)
+        public bool IsValidLastName(string lastName)
         {
             if (Regex.IsMatch(lastName, LAST_NAME))
             {
-                Console.WriteLine("lastname is validated");
-                return;
+                return true;
             }
-            Console.WriteLine("lastname is not validated");
+            return false;
         }
-        public void IsValidAddress(string address)
+        public bool IsValidAddress(string address)
         {
-            if (Regex.IsMatch(address, Address))
+            if (Regex.IsMatch(address, ADDRESS))
             {
-                Console.WriteLine("address is validated");
-                return;
+                return true;
             }
-            Console.WriteLine("address is not validated");
+            return false;
         }
-        public void IsValidCity(string city)
+        public bool IsValidCity(string city)
         {
-            if (Regex.IsMatch(city, City))
+            if (Regex.IsMatch(city, CITY))
             {
-                Console.WriteLine("city is validated");
-                return;
+                return true;
             }
-            Console.WriteLine("city is not validated");
-
+            return false;
         }
 
-        public void IsValidState(string state)
+        public bool IsValidState(string state)
         {
-            if (Regex.IsMatch(state, State))
+            if (Regex.IsMatch(state, STATE))
             {
-                Console.WriteLine("state is validated");
-                return;
+                return true;
             }
-            Console.WriteLine("state is not validated");
-
+            return false;
         }
 
         // Email validation
-        public void IsValidEmail(string email)
+        public bool IsValidEmail(string email)
         {
             if (Regex.IsMatch(email, EMAIL))
             {
-                Console.WriteLine("EMAIL_ID is validated");
-                return;
+                return true;
             }
-            Console.WriteLine("EMAIL_ID is not validated");
-
+            return false;
         }
         // Phone Number 
-        public void IsValidPhnNum(string phnNum)
+        public bool IsValidPhnNum(string phnNum)
         {
             if (Regex.IsMatch(phnNum, PHN_NUM))
             {
-                Console.WriteLine("PHN_NUM is validated");
-                return;
+                return true;
             }
-            Console.WriteLine("PHN_NUM is not validated");
+            return false;
         }
         // zip validation with 
-        public void IsValidZip(string zip)
+        public bool IsValidZip(string zip)
         {
-            if (Regex.IsMatch(zip, Zip))
+            if (Regex.IsMatch(zip, ZIP))
             {
-                Console.WriteLine("Zip is validated");
-
-                return;
+                return true;
             }
-            Console.WriteLine("Zip is not validated");
+            return false;
+        }
+        public String GetFirstName()
+        {
+            return FirstName;
+        }
+        public String GetLastName()
+        {
+            return LastName;
+        }
+        public String GetAddress()
+        {
+            return Address;
+        }
+        public String GetCity()
+        {
+            return City;
+        }
+        public String GetState()
+        {
+            return State;
+        }
+        public String GetPhnNumber()
+        {
+            return PhnNum;
+        }
+        public String GetZip()
+        {
+            return Zip;
+        }
+        public String GetEmail()
+        {
+            return Email;
+        }
+        public bool SetFirstName(string s)
+        {
+            if (IsValidFirstName(s))
+            {
+                FirstName = s;
+                return true;
+            }
+            return false;
+        }
+        public bool SetLastName(string s)
+        {
+            if (IsValidLastName(s))
+            {
+                LastName = s;
+                return true;
+            }
+            return false;
+        }
+        public bool SetAddress(string s)
+        {
+            if (IsValidAddress(s))
+            {
+                Address = s;
+                return true;
+            }
+            return false;
+        }
+        public bool SetEmail(string s)
+        {
+            if (IsValidEmail(s))
+            {
+                Email = s;
+                return true;
+            }
+            return false;
+        }
+        public bool SetCity(string s)
+        {
+            if (IsValidCity(s))
+            {
+                City = s;
+                return true;
+            }
+            return false;
+        }
+        public bool SetState(string s)
+        {
+            if (IsValidState(s))
+            {
+                State = s;
+                return true;
+            }
+            return false;
+        }
+        public bool SetZip(string s)
+        {
+            if (IsValidZip(s))
+            {
+                Zip = s;
+                return true;
+            }
+            return false;
+        }
+        public bool SetPhnNumber(string s)
+        {
+            if (IsValidPhnNum(s))
+            {
+                PhnNum = s;
+                return true;
+            }
+            return false;
         }
     }
 }
